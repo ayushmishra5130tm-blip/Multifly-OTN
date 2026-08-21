@@ -9,7 +9,7 @@ from datetime import datetime
 from pathlib import Path
 
 DASHBOARD = os.path.join(os.path.dirname(os.path.abspath(__file__)), "live_dashboard.html")
-LOG_FILE = os.path.expanduser(r"~\AppData\Roaming\Antigravity\User\scripts\activity_log.json")
+LOG_FILE = os.path.expanduser(r"~\.\activity_log.json")
 
 class LiveMonitor:
     def __init__(self):

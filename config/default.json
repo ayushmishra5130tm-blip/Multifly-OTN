@@ -1,0 +1,45 @@
+{
+  "system": {
+    "name": "Multifly OTN",
+    "version": "1.0.0",
+    "author": "Multifly Team"
+  },
+  "omniroute": {
+    "enabled": true,
+    "url": "http://localhost:20128",
+    "api_key_env": "OMNIRUTE_API_KEY"
+  },
+  "api": {
+    "host": "127.0.0.1",
+    "port": 2035
+  },
+  "websocket": {
+    "host": "127.0.0.1",
+    "port": 2036
+  },
+  "voice": {
+    "trigger": "RSS",
+    "language": "en-US",
+    "timeout": 5
+  },
+  "brain": {
+    "db_path": "multifly_brain.db",
+    "auto_backup": true
+  },
+  "plugins": {
+    "enabled": true,
+    "directory": "src/plugins"
+  },
+  "dashboard": {
+    "refresh_rate": 0.5,
+    "max_activity_items": 50
+  },
+  "security": {
+    "scan_on_startup": false,
+    "auto_fix": false
+  },
+  "deployment": {
+    "provider": "vercel",
+    "auto_deploy": false
+  }
+}

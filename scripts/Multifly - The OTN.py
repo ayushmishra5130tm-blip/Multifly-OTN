@@ -49,18 +49,18 @@ VERSION = "1.0"
 NAME = "MULTIFLY - THE OTN"
 
 PATHS = {
-    "brain": r"D:\Ayush Project\MULTIFLY BRAIN",
-    "unlimited": r"D:\Ayush Project\MULTIFLY UNLIMITED",
-    "ai_dev": r"D:\Ayush Project\MULTIFLY AI DEVELOPER",
-    "loop": r"D:\Ayush Project\loop-engineering",
-    "graphify": r"C:\Users\Ayush Mishra\graphify",
-    "semantica": r"C:\Users\Ayush Mishra\semantica",
-    "linkedin_v": r"C:\Users\Ayush Mishra\Desktop\Voltairtech LinkedIn Automated",
-    "linkedin_k": r"C:\Users\Ayush Mishra\Desktop\LinkedIn Automation - KaunTech",
-    "whatsapp": r"C:\Users\Ayush Mishra\Desktop\WhatsApp Automation",
-    "voice": r"D:\Ayush Project\Multifly Futuristic System",
-    "graphs": r"D:\Ayush Project\RSS LIVE GRAPHS",
-    "projects": r"D:\Ayush Project"
+    "brain": r"~/projects\MULTIFLY BRAIN",
+    "unlimited": r"~/projects\MULTIFLY UNLIMITED",
+    "ai_dev": r"~/projects\MULTIFLY AI DEVELOPER",
+    "loop": r"~/projects\loop-engineering",
+    "graphify": r"~\graphify",
+    "semantica": r"~\semantica",
+    "linkedin_v": r"~\Desktop\Voltairtech LinkedIn Automated",
+    "linkedin_k": r"~\Desktop\LinkedIn Automation - KaunTech",
+    "whatsapp": r"~\Desktop\WhatsApp Automation",
+    "voice": r"~/projects\Multifly Futuristic System",
+    "graphs": r"~/projects\RSS LIVE GRAPHS",
+    "projects": r"~/projects"
 }
 
 SYSTEMS = {
@@ -650,8 +650,8 @@ class MultiflyOTN:
                 "g": self.graphs_start,
                 "M": self.master_activate,
                 "m": self.master_activate,
-                "A": lambda: os.startfile(r"C:\Users\Ayush Mishra\Multifly-Developer.code-workspace"),
-                "a": lambda: os.startfile(r"C:\Users\Ayush Mishra\Multifly-Developer.code-workspace"),
+                "A": lambda: os.startfile(r"~\Multifly-Developer.code-workspace"),
+                "a": lambda: os.startfile(r"~\Multifly-Developer.code-workspace"),
                 "B": self.open_all_web,
                 "b": self.open_all_web,
                 "C": self.show_status,

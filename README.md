@@ -1,8 +1,8 @@
-# 🚀 MULTIFLY - OTN (One Total Network)
+# 🚀 MULTIFLY OTN (One Total Network)
 
 > **The Most Advanced AI-Powered Developer System Ever Built**
 
-*Built by Ayush Mishra — A complete AI development environment with voice control, self-learning, real-time dashboards, and 25+ integrated systems.*
+A complete AI development environment with voice control, self-learning, real-time dashboards, and 25+ integrated systems.
 
 ---
 
@@ -17,7 +17,7 @@ cd Multifly-OTN
 pip install -r requirements.txt
 
 # Start everything
-python multifly_launcher.py
+python cli.py start
 ```
 
 ---
@@ -26,47 +26,47 @@ python multifly_launcher.py
 
 ### 🗣️ Voice Commands (Say "RSS" + Command)
 ```bash
-python multifly_voice.py                    # Start voice control
-# Say: "RSS create a react app"            → Creates full project
-# Say: "RSS fix this error"                → AI finds and fixes bugs
-# Say: "RSS deploy to vercel"              → Deploys to cloud
-# Say: "RSS open dashboard"                → Opens live dashboard
-# Say: "RSS system status"                 → Shows all systems
+python cli.py voice                    # Start voice control
+# Say: "RSS create a react app"        → Creates full project
+# Say: "RSS fix this error"            → AI finds and fixes bugs
+# Say: "RSS deploy to vercel"          → Deploys to cloud
+# Say: "RSS open dashboard"            → Opens live dashboard
+# Say: "RSS system status"             → Shows all systems
 ```
 
 ### 🧠 Natural Language Commands
 ```bash
-python multifly_universal.py "create a react app with authentication"
-python multifly_universal.py "fix this bug in main.py"
-python multifly_universal.py "deploy to vercel"
-python multifly_universal.py "scan for security vulnerabilities"
+python src/core/multifly_universal.py "create a react app with authentication"
+python src/core/multifly_universal.py "fix this bug in main.py"
+python src/core/multifly_universal.py "deploy to vercel"
+python src/core/multifly_universal.py "scan for security vulnerabilities"
 ```
 
 ### 📊 Live Dashboard
 ```bash
-python unified_multifly.py dashboard        # Real-time animated dashboard
+python cli.py dashboard                # Real-time animated dashboard
 # Shows: 15 system nodes, live activity, brain memory, suggestions
 ```
 
 ### 🤖 AI Code Generation (OmniRoute)
 ```bash
-python multifly_100.py ai "write a login page with JWT"
-python multifly_100.py ai "explain this code"
-python multifly_100.py ai "review my code for bugs"
+python src/ai/multifly_100.py ai "write a login page with JWT"
+python src/ai/multifly_100.py ai "explain this code"
+python src/ai/multifly_100.py ai "review my code for bugs"
 ```
 
 ### 🔒 Security Scanner
 ```bash
-python multifly_powers.py scan              # Find vulnerabilities
-python multifly_powers.py fix               # Auto-fix code issues
+python src/security/multifly_powers.py scan    # Find vulnerabilities
+python src/security/multifly_powers.py fix     # Auto-fix code issues
 ```
 
 ### 🚀 Project Creation
 ```bash
-python multifly_powers.py execute "create react app myapp"
-python multifly_powers.py execute "create fastapi backend"
-python multifly_powers.py execute "create next.js store"
-python multifly_powers.py template list     # List all templates
+python src/security/multifly_powers.py execute "create react app myapp"
+python src/security/multifly_powers.py execute "create fastapi backend"
+python src/security/multifly_powers.py execute "create next.js store"
+python src/security/multifly_powers.py template list  # List all templates
 ```
 
 ---
@@ -96,30 +96,48 @@ python multifly_powers.py template list     # List all templates
 
 ---
 
-## 📁 File Structure
+## 📁 Project Structure
 
-| File | Purpose |
-|------|---------|
-| `multifly_launcher.py` | **Master launcher** - starts everything |
-| `multifly_universal.py` | **Universal brain** - understands any command |
-| `multifly_voice.py` | **Voice control** - RSS trigger commands |
-| `multifly_100.py` | **AI integration** - OmniRoute + OmniVoice |
-| `multifly_elite.py` | **Elite features** - WebSocket + NLP + ML |
-| `multifly_powers.py` | **Power tools** - code gen + security + templates |
-| `multifly_brain_db.py` | **Brain database** - SQLite memory |
-| `unified_multifly.py` | **Unified system** - TUI dashboard + API server |
-| `unified_graph.py` | **Knowledge graph** - 274 nodes, 336 edges |
-| `connect_services.py` | **External services** - Copilot + Vercel + CI/CD |
-| `omniroute_watchdog.py` | **Watchdog** - auto-restart OmniRoute |
-| `self_improve.py` | **Self-learning** - analyzes and improves |
-| `multifly_brain.py` | **Brain core** - pattern learning |
-| `multifly_master.py` | **Master control** - system orchestration |
-| `futuristic_boot.py` | **Boot system** - futuristic startup |
-| `animated_dashboard.py` | **Animated UI** - live system visualization |
-| `live_dashboard.py` | **Live monitor** - real-time system status |
-| `live_monitor.py` | **Performance monitor** - CPU, RAM, disk |
-| `neural_commands.py` | **Neural engine** - advanced command processing |
-| `Multifly - The OTN.py` | **Desktop launcher** - one-click start |
+```
+Multifly-OTN/
+├── cli.py                    # Main CLI entry point
+├── setup.py                  # Package installation
+├── requirements.txt          # Dependencies
+├── README.md                 # This file
+├── LICENSE                   # MIT License
+├── config/
+│   └── default.json          # Default configuration
+├── docs/
+│   └── INSTALLATION.md       # Installation guide
+├── examples/
+│   └── basic_usage.py        # Usage examples
+├── scripts/
+│   └── *.bat                 # Windows scripts
+└── src/
+    ├── core/                 # Core systems
+    │   ├── multifly_launcher.py
+    │   ├── multifly_universal.py
+    │   ├── multifly_brain_db.py
+    │   └── unified_multifly.py
+    ├── ai/                   # AI integration
+    │   ├── multifly_100.py
+    │   ├── multifly_elite.py
+    │   └── omniroute_*.py
+    ├── dashboard/            # Visualization
+    │   ├── animated_dashboard.py
+    │   ├── live_dashboard.py
+    │   └── live_monitor.py
+    ├── voice/                # Voice control
+    │   └── multifly_voice.py
+    ├── deployment/           # Cloud deployment
+    │   ├── connect_services.py
+    │   └── multifly_connect.py
+    ├── security/             # Security tools
+    │   ├── multifly_powers.py
+    │   └── self_improve.py
+    └── plugins/              # Plugin system
+        └── hello.py
+```
 
 ---
 
@@ -127,11 +145,16 @@ python multifly_powers.py template list     # List all templates
 
 ### System Control
 ```bash
-python multifly_launcher.py              # Start all systems
-python multifly_universal.py --status    # Check system status
-python multifly_universal.py --predict   # Predict next action
-python multifly_universal.py --heal      # Self-heal system
-python unified_multifly.py learn         # Run self-learning
+python cli.py start              # Start all systems
+python cli.py status             # Check system status
+python cli.py dashboard          # Open live dashboard
+python cli.py voice              # Start voice control
+python cli.py api                # Start REST API
+python cli.py learn              # Run self-learning
+python cli.py scan               # Security scan
+python cli.py fix                # Auto-fix code
+python cli.py ai "prompt"        # AI code generation
+python cli.py help               # Show help
 ```
 
 ### REST API Endpoints (Port 2035)
@@ -160,17 +183,17 @@ POST /api/log             # Log a system event
 
 ## 🔌 Integrations
 
-| Service | Status | Purpose |
-|---------|--------|---------|
-| **OmniRoute** | ✅ Ready | AI code generation (1.51B tokens) |
-| **OmniVoice** | ✅ Ready | Voice commands (offline) |
-| **GitHub Copilot** | ✅ Ready | AI code completion |
-| **Vercel** | ✅ Ready | Cloud deployment |
-| **GitHub Actions** | ✅ Ready | CI/CD pipeline |
-| **Graphify** | ✅ Ready | Knowledge graphs |
-| **Semantica** | ✅ Ready | AI decision engine |
-| **LinkedIn** | ✅ Ready | Automation (VoltairTech + KaunTech) |
-| **WhatsApp** | ✅ Ready | Automation |
+| Service | Purpose | Status |
+|---------|---------|--------|
+| **OmniRoute** | AI code generation (1.51B tokens) | ✅ Ready |
+| **OmniVoice** | Voice commands (offline) | ✅ Ready |
+| **GitHub Copilot** | AI code completion | ✅ Ready |
+| **Vercel** | Cloud deployment | ✅ Ready |
+| **GitHub Actions** | CI/CD pipeline | ✅ Ready |
+| **Graphify** | Knowledge graphs | ✅ Ready |
+| **Semantica** | AI decision engine | ✅ Ready |
+| **LinkedIn** | Automation | ✅ Ready |
+| **WhatsApp** | Automation | ✅ Ready |
 
 ---
 
@@ -222,24 +245,24 @@ Week 1: Brain has 100+ patterns
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-MIT License - Free to use, modify, and distribute.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
 ## 🙏 Acknowledgments
 
-Built with ❤️ by **Ayush Mishra**
-
-*The most advanced local AI developer system — one command, everything connected.*
+- Built with ❤️ by the Multifly Team
+- Powered by Python, Rich, aiohttp, and websockets
+- Inspired by the need for a unified developer experience
 
 ---
 

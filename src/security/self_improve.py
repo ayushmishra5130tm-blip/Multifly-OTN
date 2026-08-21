@@ -19,8 +19,8 @@ from rich import box
 
 console = Console(force_terminal=True)
 
-MEMORY_FILE = os.path.expanduser(r"~\AppData\Roaming\Antigravity\User\scripts\improvement_memory.json")
-LEARNING_FILE = os.path.expanduser(r"~\AppData\Roaming\Antigravity\User\scripts\learned_patterns.json")
+MEMORY_FILE = os.path.expanduser(r"~\.\improvement_memory.json")
+LEARNING_FILE = os.path.expanduser(r"~\.\learned_patterns.json")
 
 # ============================================
 # MEMORY - Remembers what it learned
@@ -177,7 +177,7 @@ class CodeOptimizer:
         """Optimize all scripts"""
         console.print("\n[bold orange1]  OPTIMIZING CODE...[/]\n")
 
-        scripts_path = os.path.expanduser(r"~\AppData\Roaming\Antigravity\User\scripts")
+        scripts_path = os.path.expanduser(r"~\.")
 
         for f in os.listdir(scripts_path):
             if f.endswith(".py"):
@@ -328,7 +328,7 @@ class AgentUpdater:
         return self.updates
 
     def _update_keybindings(self):
-        P = r"C:\Users\Ayush Mishra\AppData\Roaming\Antigravity\User\scripts"
+        P = r"~\."
         keybindings = [
             {"key":"ctrl+shift+space","command":"workbench.action.terminal.sendSequence","args":{"text":f'python "{P}\\multifly_2035.py"\n'},"when":"terminalFocus"},
             {"key":"ctrl+shift+b","command":"workbench.action.terminal.sendSequence","args":{"text":f'python "{P}\\neural_commands.py" '},"when":"terminalFocus"},
@@ -372,7 +372,7 @@ class AgentUpdater:
 
     def _update_startup(self):
         # Ensure startup bat exists
-        startup_bat = os.path.expanduser(r"~\AppData\Roaming\Antigravity\User\scripts\start_all.bat")
+        startup_bat = os.path.expanduser(r"~\.\start_all.bat")
         if not os.path.exists(startup_bat):
             with open(startup_bat, "w") as f:
                 f.write('@echo off\npython "C:\\Users\\Ayush Mishra\\AppData\\Roaming\\Antigravity\\User\\scripts\\start_omniroute.py"\n')
