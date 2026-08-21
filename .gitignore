@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Environment
+.env
+.env.local
+.env.production
+
+# Node
+node_modules/
+package-lock.json
+
+# Build
+dist/
+build/
+*.egg-info/
+
+# Temp
+*.tmp
+*.temp
+*.bak
+
+# Secrets (never commit)
+omniroute_api.key
+multifly_pids.json
+performance.json
+activity_log.json
