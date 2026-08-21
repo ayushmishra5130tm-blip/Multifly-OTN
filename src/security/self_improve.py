@@ -375,7 +375,7 @@ class AgentUpdater:
         startup_bat = os.path.expanduser(r"~\.\start_all.bat")
         if not os.path.exists(startup_bat):
             with open(startup_bat, "w") as f:
-                f.write('@echo off\npython "C:\\Users\\Ayush Mishra\\AppData\\Roaming\\Antigravity\\User\\scripts\\start_omniroute.py"\n')
+                f.write('@echo off\npython "start_omniroute.py"\n')
             self.updates.append("Startup bat created")
 
 # ============================================
