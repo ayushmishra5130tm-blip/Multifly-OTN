@@ -384,6 +384,40 @@ class UniversalUnderstander:
                 "keywords": ["help", "commands", "what can", "how to", "guide"],
                 "system": "help"
             },
+            # Obsidian knowledge management
+            "obsidian_note": {
+                "patterns": [
+                    r"(?:note|notes|write|save|document|jot)\s+(?:about|on|for)?\s*(.+)?",
+                    r"(?:create|make|new)\s+(?:a\s+)?(?:note|document|entry)",
+                    r"(?:daily|journal|log)\s+(?:note|entry)?",
+                ],
+                "keywords": ["note", "notes", "write note", "save note", "document", "journal", "daily note"],
+                "system": "obsidian"
+            },
+            "obsidian_search": {
+                "patterns": [
+                    r"(?:search|find|lookup|query)\s+(?:my\s+)?(?:notes?|knowledge|vault|docs?)\s*(?:for)?\s*(.+)?",
+                    r"(?:what\s+did\s+i|recall|remember)\s+(.+)?",
+                ],
+                "keywords": ["search notes", "find note", "search knowledge", "recall", "remember"],
+                "system": "obsidian"
+            },
+            "obsidian_graph": {
+                "patterns": [
+                    r"(?:show|open|view)\s+(?:the\s+)?(?:knowledge\s+)?graph",
+                    r"(?:graph|visualize)\s+(?:my\s+)?(?:notes?|knowledge|connections)",
+                ],
+                "keywords": ["graph", "knowledge graph", "connections", "visualize notes"],
+                "system": "obsidian"
+            },
+            "obsidian_code": {
+                "patterns": [
+                    r"(?:save|store|clip)\s+(?:this\s+)?(?:code|snippet|function)",
+                    r"(?:code\s+snippet|snippet|code\s+note)",
+                ],
+                "keywords": ["save code", "code snippet", "store code", "clip code"],
+                "system": "obsidian"
+            },
         }
 
         # Entity extraction patterns
@@ -504,6 +538,10 @@ class UniversalUnderstander:
             "learning": "Finding learning resources",
             "config": "Adjusting configuration",
             "help": "Showing available commands",
+            "obsidian_note": "Creating note in knowledge vault",
+            "obsidian_search": "Searching your knowledge base",
+            "obsidian_graph": "Opening knowledge graph",
+            "obsidian_code": "Saving code snippet to vault",
         }
         return interpretations.get(intent, f"Processing: {text}")
 
@@ -536,7 +574,14 @@ class UniversalExecutor:
             "config": lambda: self._get_config(),
             "help": lambda: self._get_help(),
             "learning": lambda: self._get_learning(),
+            "obsidian": lambda: self._get_obsidian(),
         }
+        # Load Obsidian bridge
+        try:
+            from obsidian_bridge import ObsidianBridge
+            self.obsidian = ObsidianBridge()
+        except Exception:
+            self.obsidian = None
 
     def execute(self, understanding):
         """Execute based on understanding."""
@@ -546,6 +591,13 @@ class UniversalExecutor:
         entities = understanding.get("entities", {})
 
         start_time = time.time()
+
+        # Auto-log to Obsidian vault
+        if self.obsidian:
+            try:
+                self.obsidian.log_command(understanding["original"])
+            except Exception:
+                pass
 
         # Route to the right system
         if intent == "create_project":
@@ -582,6 +634,8 @@ class UniversalExecutor:
             result = self._learning_action(entities)
         elif intent == "open_file":
             result = self._open_file(entities)
+        elif intent in ("obsidian_note", "obsidian_search", "obsidian_graph", "obsidian_code"):
+            result = self._obsidian_action(intent, entities, understanding)
         else:
             result = self._unknown_action(understanding)
 
@@ -731,6 +785,62 @@ class UniversalExecutor:
         desktop = os.path.expanduser(r"~\Desktop")
         subprocess.Popen(f'explorer "{desktop}"', shell=True)
         return {"success": True, "message": "Opened Desktop"}
+
+    def _obsidian_action(self, intent, entities, understanding):
+        """Handle Obsidian knowledge management."""
+        try:
+            # Import Obsidian integration
+            obsidian_path = os.path.join(SCRIPT_DIR, "obsidian_integration.py")
+            if os.path.exists(obsidian_path):
+                sys.path.insert(0, SCRIPT_DIR)
+                from obsidian_integration import MultiflyObsidian
+                obs = MultiflyObsidian()
+            elif self.obsidian:
+                obs = self.obsidian
+            else:
+                return {"success": False, "message": "Obsidian bridge not available"}
+
+            if intent == "obsidian_note":
+                topic = entities.get("extracted", "Quick Note")
+                text_content = understanding.get("original", "")
+                if hasattr(obs, 'auto_note'):
+                    path = obs.auto_note("command", f"Note - {topic}", text_content, "voice-command")
+                else:
+                    path = obs.bridge.auto_note("command", f"Note - {topic}", text_content, "voice-command")
+                return {"success": True, "message": f"Note saved: {path}"}
+
+            elif intent == "obsidian_search":
+                query = entities.get("extracted", understanding["original"])
+                if hasattr(obs, 'search'):
+                    results = obs.search(query)
+                else:
+                    results = obs.bridge.search_knowledge(query)
+                if results:
+                    msg = f"Found {len(results)} results:\n"
+                    for title, content, score in results[:3]:
+                        msg += f"  [{score:.2f}] {title}\n"
+                    return {"success": True, "message": msg}
+                return {"success": True, "message": "No matching notes found"}
+
+            elif intent == "obsidian_graph":
+                if hasattr(obs, 'graph_data'):
+                    data = obs.graph_data()
+                else:
+                    data = obs.bridge.export_graph_data()
+                return {"success": True, "message": f"Knowledge graph: {len(data['nodes'])} notes, {len(data['edges'])} connections"}
+
+            elif intent == "obsidian_code":
+                code = understanding.get("original", "# code")
+                if hasattr(obs, 'code_snippet'):
+                    path = obs.code_snippet("snippet", code)
+                else:
+                    path = obs.bridge.auto_note("code", "Code Snippet", code, "voice")
+                return {"success": True, "message": f"Code saved: {path}"}
+
+        except Exception as e:
+            return {"success": False, "message": f"Obsidian error: {str(e)}"}
+
+        return {"success": False, "message": "Obsidian action failed"}
 
     def _unknown_action(self, understanding):
         """Handle unknown commands."""
